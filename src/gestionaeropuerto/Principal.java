@@ -2,9 +2,7 @@
 package gestionaeropuerto;
 
 import java.util.Scanner;
-import java.text.Collator;
 import java.text.Normalizer;
-import java.util.Locale;
 
 /**
  *
