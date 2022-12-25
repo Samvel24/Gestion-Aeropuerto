@@ -194,19 +194,20 @@ public class Principal
     public static void mostrarPatrocinio(Aeropuerto aeropuertos[]) {
         String empresas[]; // Arreglo de empresas de un aeropuerto Privado
         
-        for (int i = 0; i < aeropuertos.length; i++) {
-            if(aeropuertos[i] instanceof AeropuertoPrivado) {
-                System.out.println("Aeropuerto Privado: " + aeropuertos[i].getNombre());
-                empresas = ((AeropuertoPrivado)aeropuertos[i]).getListaEmpresas(); // Downcasting
+        for (Aeropuerto aeropuerto : aeropuertos) {
+            if (aeropuerto instanceof AeropuertoPrivado) {
+                System.out.println("Aeropuerto Privado: " + aeropuerto.getNombre());
+                empresas = ((AeropuertoPrivado) aeropuerto).getListaEmpresas(); // Downcasting
+                
                 System.out.println("Empresas: ");
-                for (int j = 0; j < empresas.length; j++) {
-                    System.out.println(empresas[j]);
+                for (String empresa : empresas) {
+                    System.out.println(empresa);
                 }
-            }
+            } 
             else {
-                System.out.println("Aeropuerto Público: " +aeropuertos[i].getNombre());
+                System.out.println("Aeropuerto Público: " + aeropuerto.getNombre());
                 System.out.println("Subvencion: " 
-                        + ((AeropuertoPublico)aeropuertos[i]).getSubvencion()); // Downcasting
+                        + ((AeropuertoPublico) aeropuerto).getSubvencion()); // Downcasting
             }
             System.out.println("");
         }
