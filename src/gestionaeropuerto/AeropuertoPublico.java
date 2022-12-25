@@ -19,4 +19,8 @@ public class AeropuertoPublico extends Aeropuerto
         super(nombre, ciudad, pais);
         this.subvencion = subvencion;
     }
+    
+    public double getSubvencion() {
+        return subvencion;
+    }
 }
