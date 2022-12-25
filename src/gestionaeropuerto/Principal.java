@@ -109,8 +109,9 @@ public class Principal
     
     public static void menu() {
         int opcion;
-        String nombreAeropuerto = "";
+        String nombreAeropuerto = "", nombreCompañia = "";
         Aeropuerto aeropuerto;
+        Compañia compañia;
         
         do {            
             System.out.println("\t\t.::MENÚ::.");
@@ -131,7 +132,10 @@ public class Principal
                     mostrarPatrocinio(aeropuertos);
                     break;
                 case 3: // Listar compañias de un aeropuerto
-                    entrada.nextLine();
+                    /* Limpiamos el buffer de entrada
+                    Ver: https://www.clasesdeinformaticaweb.com/java-desde-cero/el-buffer-de-la-clase-scanner/
+                    */
+                    entrada.nextLine(); 
                     System.out.println("Escribe el nombre del Aeropuerto: ");
                     nombreAeropuerto = entrada.nextLine();
                     aeropuerto = buscarAeropuerto(nombreAeropuerto, aeropuertos);
@@ -143,6 +147,19 @@ public class Principal
                     }
                     break;
                 case 4: // Mostrar lista de vuelos por compañia
+                    entrada.nextLine(); 
+                    System.out.println("Escribe el nombre del Aeropuerto: ");
+                    nombreAeropuerto = entrada.nextLine();
+                    aeropuerto = buscarAeropuerto(nombreAeropuerto, aeropuertos);
+                    if(aeropuerto == null) {
+                        System.out.println("El aeropuerto buscado no existe");
+                    }
+                    else {
+                        System.out.println("Escribe el nombre de la compañia");
+                        nombreCompañia = entrada.nextLine();
+                        compañia = aeropuerto.getCompañia(nombreCompañia);
+                        mostrarVuelos(compañia);
+                    }
                     break;
                 case 5: // Listar posibles vuelos de origen a destino
                     break;
@@ -231,6 +248,20 @@ public class Principal
         
         for (int i = 0; i < aeropuerto.getNumCompañias(); i++) {
             System.out.println(aeropuerto.getCompañia(i).getNombre());
+        }
+    }
+    
+    public static void mostrarVuelos(Compañia compañia) {
+        Vuelo vuelo;
+        System.out.println("Los vuelos de la compañia: " +compañia.getNombre());
+        
+        for (int i = 0; i < compañia.getNumVuelos(); i++) {
+            vuelo = compañia.getVuelo(i);
+            System.out.println("Identificador: "  + vuelo.getIdentificador());
+            System.out.println("Ciudad de origen: " + vuelo.getCiudadOrigen());
+            System.out.println("Ciudad destino: " + vuelo.getCiudadDestino());
+            System.out.println("Precio: $" + vuelo.getPrecio());
+            System.out.println("");
         }
     }
 }
