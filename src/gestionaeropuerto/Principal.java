@@ -2,6 +2,9 @@
 package gestionaeropuerto;
 
 import java.util.Scanner;
+import java.text.Collator;
+import java.text.Normalizer;
+import java.util.Locale;
 
 /**
  *
@@ -10,7 +13,15 @@ import java.util.Scanner;
 
 public class Principal 
 {
-    static Scanner entrada = new Scanner(System.in);
+    /* La norma ISO 8859-1 es la que define la codificación del alfabeto latino, 
+    incluyendo los diacríticos (como letras acentuadas, ñ, ç), y letras especiales 
+     (como ß, Ø), esto permite usar caracteres acentuados del idioma español con la
+    clase Scanner.
+    Ver:
+    https://es.wikipedia.org/wiki/ISO/IEC_8859-1
+    https://es.stackoverflow.com/a/485831/101909
+    */
+    static Scanner entrada = new Scanner(System.in, "ISO-8859-1");
     final static int numAeropuertos = 4;
     static Aeropuerto aeropuertos[] = new Aeropuerto[numAeropuertos];
     
@@ -98,6 +109,8 @@ public class Principal
     
     public static void menu() {
         int opcion;
+        String nombreAeropuerto = "";
+        Aeropuerto aeropuerto;
         
         do {            
             System.out.println("\t\t.::MENÚ::.");
@@ -107,7 +120,7 @@ public class Principal
             System.out.println("4. Mostrar lista de vuelos por compañia");
             System.out.println("5. Listar posibles vuelos de origen a destino");
             System.out.println("6. Salir");
-            System.out.println("Escriba una opcion: ");
+            System.out.println("Escribe una opcion: ");
             opcion = entrada.nextInt();
             
             switch (opcion) {
@@ -118,6 +131,16 @@ public class Principal
                     mostrarPatrocinio(aeropuertos);
                     break;
                 case 3: // Listar compañias de un aeropuerto
+                    entrada.nextLine();
+                    System.out.println("Escribe el nombre del Aeropuerto: ");
+                    nombreAeropuerto = entrada.nextLine();
+                    aeropuerto = buscarAeropuerto(nombreAeropuerto, aeropuertos);
+                    if(aeropuerto == null) {
+                        System.out.println("El aeropuerto buscado no existe");
+                    }
+                    else {
+                        mostrarCompañias(aeropuerto);
+                    }
                     break;
                 case 4: // Mostrar lista de vuelos por compañia
                     break;
@@ -172,5 +195,42 @@ public class Principal
             }
             System.out.println("");
         }
-    }    
+    }
+    
+    public static Aeropuerto buscarAeropuerto(String nombre, Aeropuerto aeropuertos[]) {
+        boolean encontrado = false;
+        int i = 0;
+        
+        String cadena1 = limpiarCadena(nombre);
+        String cadena2 = "";
+                
+        Aeropuerto aero = null;
+        while ((!encontrado) && (i < aeropuertos.length)) {
+            cadena2 = limpiarCadena(aeropuertos[i].getNombre());
+            if(cadena1.equals(cadena2)) {
+                encontrado = true;
+                aero = aeropuertos[i];
+            }
+            i++;
+        }
+
+        return aero;
+    }
+    
+    /* este método permite eliminar los diacríticos de una cadena de texto
+    Ver: https://loquemeinteresadelared.wordpress.com/2015/10/01/eliminar-acentos-y-diacriticos-de-un-string-en-java/
+    */
+   public static String limpiarCadena(String texto) {
+        texto = Normalizer.normalize(texto, Normalizer.Form.NFD);
+        texto = texto.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        return texto;
+    }
+    
+    public static void mostrarCompañias(Aeropuerto aeropuerto) {
+        System.out.println("Las compañias del Aeropuerto: " + aeropuerto.getNombre());
+        
+        for (int i = 0; i < aeropuerto.getNumCompañias(); i++) {
+            System.out.println(aeropuerto.getCompañia(i).getNombre());
+        }
+    }
 }
