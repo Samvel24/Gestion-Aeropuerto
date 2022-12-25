@@ -100,7 +100,7 @@ public class Principal
         int opcion;
         
         do {            
-            System.out.println("\t.::MENÚ::.");
+            System.out.println("\t\t.::MENÚ::.");
             System.out.println("1. Consultar aeropuertos gestionados (Públicos o Privados)");
             System.out.println("2. Consultar empresas (Privada) o Subvención (Pública)");
             System.out.println("3. Listar compañias de un aeropuerto");
@@ -115,6 +115,7 @@ public class Principal
                     mostrarDatosAeropuerto(aeropuertos);
                     break;
                 case 2: // Ver empresas (Privado) o subvención (Público)
+                    mostrarPatrocinio(aeropuertos);
                     break;
                 case 3: // Listar compañias de un aeropuerto
                     break;
@@ -151,4 +152,25 @@ public class Principal
             System.out.println("");
         }
     }
+    
+    public static void mostrarPatrocinio(Aeropuerto aeropuertos[]) {
+        String empresas[]; // Arreglo de empresas de un aeropuerto Privado
+        
+        for (int i = 0; i < aeropuertos.length; i++) {
+            if(aeropuertos[i] instanceof AeropuertoPrivado) {
+                System.out.println("Aeropuerto Privado: " + aeropuertos[i].getNombre());
+                empresas = ((AeropuertoPrivado)aeropuertos[i]).getListaEmpresas(); // Downcasting
+                System.out.println("Empresas: ");
+                for (int j = 0; j < empresas.length; j++) {
+                    System.out.println(empresas[j]);
+                }
+            }
+            else {
+                System.out.println("Aeropuerto Público: " +aeropuertos[i].getNombre());
+                System.out.println("Subvencion: " 
+                        + ((AeropuertoPublico)aeropuertos[i]).getSubvencion()); // Downcasting
+            }
+            System.out.println("");
+        }
+    }    
 }
