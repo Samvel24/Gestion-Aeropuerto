@@ -2,7 +2,7 @@
  
 Managing an airport using the Java programming language (This project is part of the course "Aprende Programación en Java (de Básico a Avanzado)" available on Udemy (https://www.udemy.com/course/aprende-programacion-en-java-desde-cero/), made by Programación ATS)
 
-**En memoria de _Alejandro Miguel Taboada Sanchez_ (creador del canal de YouTube Programación ATS), gracias por cada curso, cada clase y todos esos conocimientos aportados, la forma en que dabas tus clases permitía (y sigue permitiendo) entender la programación de manera más fácil**
+**En memoria de _Alejandro Miguel Taboada Sánchez_ (creador del canal de YouTube Programación ATS), gracias por cada curso, cada clase y todos esos conocimientos aportados, la forma en que dabas tus clases permitía (y sigue permitiendo) entender la programación de manera más fácil**
  
 ### Previous requirements
 To run this project you only need to have the IDE of your choice installed to develop in Java language.
