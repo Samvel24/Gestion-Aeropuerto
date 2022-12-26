@@ -15,7 +15,7 @@ To run this project you only need to have the IDE of your choice installed to de
     1. All the flight companies that operate in it.
     2. Name of the airport, the city where it is located and the country to which it belongs.
 * Each company is characterized by its name and the list of flights it offers.
-* Flights are defined by their identifier, the city of origin, the city of destination, the price of the trip, the list of passengers, the maximum number of passengers allowed on the flight and the actual number of passengers who have reserved a seat on the flight. plane.
+* Flights are defined by their identifier, the city of origin, the city of destination, the price of the trip, the list of passengers, the maximum number of passengers allowed on the flight and the actual number of passengers who have reserved a seat on the plane.
 * Airports can be private or public.
     1. Private airports have a number of companies that sponsor them and it is necessary to know the name of each of those companies.
     2. For public airports it is required to know the amount of money corresponding to the government subsidy.
